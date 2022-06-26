@@ -6533,36 +6533,6 @@ mt.__namecall = function(self, ...)
 
 	return oldNamecall(self, unpack(args)) 
 end 
-mt.__index = function(self, key) 
-	local CallingScript = getcallingscript() 
-
-	if not checkcaller() and self == Viewmodels and LocalPlayer.Character ~= nil and LocalPlayer.Character:FindFirstChild("UpperTorso") then 
-		local WeaponName = GSUB(key, "v_", "") 
-		if not FIND(WeaponName, "Arms") then 
-			if Weapons[WeaponName]:FindFirstChild("Melee") and values.skins.knife["knife changer"].Toggle then 
-				if Viewmodels:FindFirstChild("v_"..values.skins.knife.model.Scroll) then 
-					return Viewmodels:FindFirstChild("v_"..values.skins.knife.model.Scroll) 
-				else 
-					local Clone = Models.Knives[values.skins.knife.model.Scroll]:Clone() 
-					return Clone 
-				end 
-			end 
-		end 
-	end 
-	if key == "Value" then 
-		if self.Name == "Auto" and TBLFIND(values.misc.client["gun modifiers"].Jumbobox, "automatic") then 
-			return true 
-		elseif self.Name == "ReloadTime" and TBLFIND(values.misc.client["gun modifiers"].Jumbobox, "reload") then 
-			return 0.001 
-		elseif self.Name == "EquipTime" and TBLFIND(values.misc.client["gun modifiers"].Jumbobox, "equip") then 
-			return 0.001 
-		elseif self.Name == "BuyTime" and TBLFIND(values.misc.client.shop.Jumbobox, "inf time") then 
-			return 5 
-		end 
-	end 
-
-	return oldIndex(self, key) 
-end 
 
 local perf__ = LocalPlayer.PlayerGui.Performance.Perf 
 
